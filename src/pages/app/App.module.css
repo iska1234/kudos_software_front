@@ -1,0 +1,9 @@
+.wrapper {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color:#e2e8f0;
+  padding: 0;
+}
