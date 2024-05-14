@@ -3,12 +3,12 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { router } from "./router/router.jsx";
 import { RouterProvider } from "react-router-dom";
-import App from "./pages/app/App.jsx";
+import { AuthProvider } from "./contexts/authContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router}>
-      <App />
-    </RouterProvider>
+    <AuthProvider isAuthenticated={false}>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );

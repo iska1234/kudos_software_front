@@ -21,7 +21,6 @@ function Auth() {
     setStatus("loading");
 
     login(email, password)
-    notify()
       .then(() => {
         setStatus("success");
       })
@@ -56,105 +55,107 @@ function Auth() {
   const hasError = status === "error";
 
   return (
-    <div className={s.wrapper}>
-      <h1 className={s.title}>Sistema de Carga de Datos</h1>
-      <div className={s.tabs}>
-        <Button
-          onClick={() => handleTabChange("login")}
-          className={activeTab === "login" ? s.active : ""}
-        >
-          Login
-        </Button>
-        <Button
-          onClick={() => handleTabChange("signup")}
-          className={activeTab === "signup" ? s.active : ""}
-        >
-          Signup
-        </Button>
-        <Button onClick={notify}>notify</Button>
-      </div>
-      {activeTab === "login" && (
-        <form onSubmit={handleLoginSubmit} className={s.form}>
-          <div className={s.formfield}>
-            <label htmlFor="email">Email</label>
-            <Input
-              id="email"
-              type="email"
-              name="email"
-              placeholder="user@example.com"
-              required
-            />
-          </div>
-          <div className={s.formfield}>
-            <label htmlFor="password">Password</label>
-            <Input
-              type="password"
-              id="password"
-              name="password"
-              required
-              minLength={6}
-            />
-          </div>
-          <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Loading..." : buttonText}
+    <div className={s.container}>
+      <div className={s.wrapper}>
+        <h1 className={s.title}>Sistema de Carga de Datos</h1>
+        <div className={s.tabs}>
+          <Button
+            onClick={() => handleTabChange("login")}
+            className={activeTab === "login" ? s.active : ""}
+          >
+            Login
           </Button>
-        </form>
-      )}
+          <Button
+            onClick={() => handleTabChange("signup")}
+            className={activeTab === "signup" ? s.active : ""}
+          >
+            Signup
+          </Button>
+          <Button onClick={notify}>notify</Button>
+        </div>
+        {activeTab === "login" && (
+          <form onSubmit={handleLoginSubmit} className={s.form}>
+            <div className={s.formfield}>
+              <label htmlFor="email">Email</label>
+              <Input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="user@example.com"
+                required
+              />
+            </div>
+            <div className={s.formfield}>
+              <label htmlFor="password">Password</label>
+              <Input
+                type="password"
+                id="password"
+                name="password"
+                required
+                minLength={6}
+              />
+            </div>
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? "Loading..." : buttonText}
+            </Button>
+          </form>
+        )}
 
-      {activeTab === "signup" && (
-        <form onSubmit={handleSignupSubmit} className={s.form}>
-          <div className={s.formfield}>
-            <label htmlFor="email">Email</label>
-            <Input
-              id="email"
-              type="email"
-              name="email"
-              placeholder="user@example.com"
-              required
-            />
-          </div>
-          <div className={s.formfield}>
-            <label htmlFor="password">Password</label>
-            <Input
-              type="password"
-              id="password"
-              name="password"
-              required
-              minLength={6}
-            />
-          </div>
-          <div className={s.formfield}>
-            <label htmlFor="name">Name</label>
-            <Input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Your Name"
-              required
-            />
-          </div>
-          <div className={s.formfield}>
-            <label htmlFor="age">Age</label>
-            <Input
-              type="number"
-              id="age"
-              name="age"
-              placeholder="Your Age"
-              required
-              min={0}
-            />
-          </div>
-          <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Loading..." : buttonText}
-          </Button>
-        </form>
-      )}
-      {hasError && (
-        <p className={s["error-message"]}>
-          {signUpErrors || "Invalid Credentials"}
-        </p>
-      )}
-      <Toaster position="top-right" reverseOrder={true} />
+        {activeTab === "signup" && (
+          <form onSubmit={handleSignupSubmit} className={s.form}>
+            <div className={s.formfield}>
+              <label htmlFor="email">Email</label>
+              <Input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="user@example.com"
+                required
+              />
+            </div>
+            <div className={s.formfield}>
+              <label htmlFor="password">Password</label>
+              <Input
+                type="password"
+                id="password"
+                name="password"
+                required
+                minLength={6}
+              />
+            </div>
+            <div className={s.formfield}>
+              <label htmlFor="name">Name</label>
+              <Input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Your Name"
+                required
+              />
+            </div>
+            <div className={s.formfield}>
+              <label htmlFor="age">Age</label>
+              <Input
+                type="number"
+                id="age"
+                name="age"
+                placeholder="Your Age"
+                required
+                min={0}
+              />
+            </div>
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? "Loading..." : buttonText}
+            </Button>
+          </form>
+        )}
+        {hasError && (
+          <p className={s["error-message"]}>
+            {signUpErrors || "Invalid Credentials"}
+          </p>
+        )}
+        <Toaster position="top-right" reverseOrder={true} />
+      </div>
     </div>
   );
 }

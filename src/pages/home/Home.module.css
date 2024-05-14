@@ -1,0 +1,19 @@
+.navbar{
+  background-color: #1F7BB9;
+  margin: 15px;
+  padding: 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+}
+.content{
+  min-height: 85dvh;
+  padding: 15px;
+  background-color:#e2e8f0;
+}
+
+.linkContainer{
+  display: flex;
+  gap: 20px;
+}
