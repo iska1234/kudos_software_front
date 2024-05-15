@@ -39,9 +39,20 @@ export function AuthProvider({ children }) {
         window.localStorage.setItem(tokenKey, token);
         setIsAuthenticated(true);
       } else {
-        const error =
-          body.errors instanceof Array ? body.errors.join(", ") : body.errors;
-        return Promise.reject(new Error(error));
+        const errors = body.error.details;
+        let errorMessage = "";
+  
+        errors.forEach((error) => {
+          if (error.email === "El usuario no existe") {
+            errorMessage = "El usuario no existe";
+          } else if (error.email === "Contraseña incorrecta") {
+            errorMessage = "Contraseña incorrecta";
+          } else if (error.password === "Contraseña incorrecta") {
+            errorMessage = "Contraseña incorrecta";
+          }
+        });
+  
+        return Promise.reject(new Error(errorMessage || "Error en el login"));
       }
     } catch (error) {
       console.error("Error during login:", error);
@@ -67,21 +78,18 @@ export function AuthProvider({ children }) {
   
     try {
       const response = await fetch(baseUrl + "/auth/register", options);
+      const body = await response.json();
   
       if (response.ok) {
         return { success: true, message: "Usuario registrado exitosamente" };
       } else {
-        const body = await response.json();
-        const error =
-          body.message || "Error desconocido al registrar usuario";
-        return Promise.reject(new Error(error));
+        throw new Error(body.error.message || "Error desconocido al registrar usuario");
       }
     } catch (error) {
-      return Promise.reject(new Error("Error de red al registrar usuario"));
+      throw new Error(error.message || "Error de red al registrar usuario");
     }
   }
-  
-  
+
 
   function logout() {
     window.localStorage.removeItem(tokenKey);

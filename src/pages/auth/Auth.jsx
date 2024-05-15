@@ -3,7 +3,6 @@ import s from "./Auth.module.css";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import { useAuth } from "../../contexts/authContext";
-import toast, { Toaster } from "react-hot-toast";
 
 function Auth() {
   const { login, signup } = useAuth();
@@ -11,7 +10,7 @@ function Auth() {
   const [status, setStatus] = React.useState("idle");
   const [activeTab, setActiveTab] = React.useState("login");
   const [signUpErrors, setSignUpErrors] = React.useState(null);
-  const notify = () => toast.success("Login Success!");
+
   function handleLoginSubmit(event) {
     event.preventDefault();
 
@@ -24,26 +23,47 @@ function Auth() {
       .then(() => {
         setStatus("success");
       })
-      .catch(() => setStatus("error"));
+      .catch((error) => {
+        setStatus("error");
+        setSignUpErrors(error.message);
+        setTimeout(() => {
+          setSignUpErrors(null);
+        }, 2000);
+      });
   }
 
   function handleSignupSubmit(event) {
     event.preventDefault();
-
+  
     const email = event.target.email.value;
     const password = event.target.password.value;
     const name = event.target.name.value;
     const age = event.target.age.value;
-
+  
     setStatus("loading");
-
+  
     signup(email, password, name, Number(age))
       .then(() => setStatus("success"))
       .catch((error) => {
         setStatus("error");
-        setSignUpErrors(error.message);
+  
+        if (
+          error.message === "El usuario no existe" ||
+          error.message === "Contraseña incorrecta"
+        ) {
+          setSignUpErrors(error.message);
+        } else {
+          setSignUpErrors(
+            error.message || "Error desconocido al registrar usuario"
+          );
+        }
+  
+        setTimeout(() => {
+          setSignUpErrors(null);
+        }, 2000);
       });
   }
+  
 
   function handleTabChange(tab) {
     setActiveTab(tab);
@@ -71,7 +91,6 @@ function Auth() {
           >
             Signup
           </Button>
-          <Button onClick={notify}>notify</Button>
         </div>
         {activeTab === "login" && (
           <form onSubmit={handleLoginSubmit} className={s.form}>
@@ -149,12 +168,7 @@ function Auth() {
             </Button>
           </form>
         )}
-        {hasError && (
-          <p className={s["error-message"]}>
-            {signUpErrors || "Invalid Credentials"}
-          </p>
-        )}
-        <Toaster position="top-right" reverseOrder={true} />
+        {hasError && <p className={s.errorMessage}>{signUpErrors}</p>}
       </div>
     </div>
   );

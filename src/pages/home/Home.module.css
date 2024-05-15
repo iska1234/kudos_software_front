@@ -17,3 +17,10 @@
   display: flex;
   gap: 20px;
 }
+
+.links {
+  font-size: 20px;
+  color: white;
+  list-style: none;
+  text-decoration: none;
+}

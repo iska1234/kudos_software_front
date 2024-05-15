@@ -40,6 +40,7 @@
   border-radius: var(--rounded-lg, 8px);
   border: 1px solid rgba(60, 95, 95, 1);
   transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
 }
 
 .tabs > button:hover {
@@ -65,7 +66,7 @@ button.active {
   justify-content: space-between;
 }
 
-.error-message {
-  color: var(--danger-border);
+.errorMessage {
+  color: red;
   text-align: center;
 }

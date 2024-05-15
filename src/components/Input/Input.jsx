@@ -1,9 +1,18 @@
 import s from "./Input.module.css";
 
-const Input = ({ id, type = "text", value, ...delegated }) => {
+const Input = ({
+  id,
+  type = "text",
+  className,
+  error,
+  value,
+  ...delegated
+}) => {
+  const inputClasses = error ? `${s.input} ${s.error}` : s.input;
+
   return (
     <input
-      className={s.input}
+      className={`${inputClasses} ${className}`}
       id={id}
       type={type}
       value={value}

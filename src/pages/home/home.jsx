@@ -9,8 +9,8 @@ const Home = () => {
     <div>
       <nav className={s.navbar}>
         <div className={s.linkContainer}>
-          <Link to={"/"}>Kubos Software</Link>
-          <Link to={"/saved"}>saved</Link>
+          <Link className={s.links} to={"/"}>Kubos Software</Link>
+          <Link className={s.links} to={"/saved"}>Saved Data</Link>
         </div>
         <Button
           variant="secondary"
