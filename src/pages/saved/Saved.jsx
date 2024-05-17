@@ -1,12 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import * as React from "react";
 
 const Saved = () => {
-  return (
-    <div>
-        Home
-    </div>
-  )
-}
+  return <div>Saved</div>;
+};
 
-export default Saved
+export default Saved;
