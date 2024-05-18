@@ -1,10 +1,12 @@
 import * as React from "react";
 import { Link, useParams } from "react-router-dom";
-import { getSavedDataById } from "../../data/useSavedData";
+import { getSavedDataById } from "../../../data/useSavedData";
 import s from "./SavedDetails.module.css";
-import { parseDataContent } from "../../utils/parseDataContent";
-import Button from "../../components/Button/Button";
-import { formatDate } from "../../utils/formatDate";
+
+import Button from "../../../components/Button/Button";
+import { parseDataContent } from "../../../utils/parseDataContent";
+import { formatDate } from "../../../utils/formatDate";
+
 
 const SavedDetails = () => {
   const { id } = useParams();

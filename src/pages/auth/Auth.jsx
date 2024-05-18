@@ -4,6 +4,7 @@ import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import { useAuth } from "../../contexts/authContext";
 
+
 function Auth() {
   const { login, signup } = useAuth();
 
@@ -22,6 +23,7 @@ function Auth() {
     login(email, password)
       .then(() => {
         setStatus("success");
+
       })
       .catch((error) => {
         setStatus("error");

@@ -1,5 +1,7 @@
 import * as React from "react";
-import { baseUrl, tokenKey } from "../constants";
+import { baseUrl, tokenKey, userKey } from "../constants";
+import { encryptData } from "../utils/encriptData";
+
 
 const authContext = React.createContext({
   isAuthenticated: false,
@@ -9,6 +11,7 @@ const authContext = React.createContext({
 
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+
 
   React.useEffect(() => {
     const savedToken = window.localStorage.getItem(tokenKey);
@@ -32,8 +35,10 @@ export function AuthProvider({ children }) {
       const body = await response.json();
   
       if (response.ok) {
-        const { token } = body.data;
+        const { token, role } = body.data;
+        const encryptedRole = encryptData(role);
         window.localStorage.setItem(tokenKey, token);
+        window.localStorage.setItem(userKey, encryptedRole);
         setIsAuthenticated(true);
       } else {
         const errors = body.error.details;
@@ -55,8 +60,9 @@ export function AuthProvider({ children }) {
       console.error("Error during login:", error);
       return Promise.reject(error);
     }
-  }
+}
   
+
   async function signup(email, password, name, age) {
     const userData = {
       email,
@@ -87,9 +93,10 @@ export function AuthProvider({ children }) {
     }
   }
 
-
   function logout() {
     window.localStorage.removeItem(tokenKey);
+    window.localStorage.removeItem("lastVisitedRoute");
+    window.localStorage.removeItem(userKey);
     setIsAuthenticated(false);
   }
 

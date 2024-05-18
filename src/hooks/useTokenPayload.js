@@ -26,7 +26,7 @@ const useTokenPayload = () => {
     } else {
       console.error('No se encontró ningún token en el localStorage.');
     }
-  }, []);
+  }, []); // Solo se ejecuta una vez al montar el componente
 
   return { userId, role };
 };

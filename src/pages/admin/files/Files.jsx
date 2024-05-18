@@ -1,16 +1,18 @@
 import * as React from "react";
-import Input from "../../components/Input/Input";
+
 import Papa from "papaparse";
 import s from "./Files.module.css";
 import { BadgeCheck } from "lucide-react";
-import Button from "../../components/Button/Button";
-import Modal from "../../components/Modal";
-import useTokenPayload from "../../hooks/useTokenPayload";
+import Button from "../../../components/Button/Button";
+import Modal from "../../../components/Modal";
+
 import toast, { Toaster } from "react-hot-toast";
+import Input from "../../../components/Input/Input";
+import useTokenPayload from "../../../hooks/useTokenPayload";
 
 const Files = () => {
   const [data, setData] = React.useState([]);
-const [tableHeaders, setTableHeaders] = React.useState([]);
+
 
   const [errors, setErrors] = React.useState([]);
   const [isOpen, setIsOpen] = React.useState(false);
@@ -29,7 +31,6 @@ const [tableHeaders, setTableHeaders] = React.useState([]);
       complete: (results) => {
         const rowData = results.data.map((row) => ({ ...row }));
         setData(rowData);
-        setTableHeaders(Object.keys(rowData[0]));
         validateFields(rowData);
       },
     });

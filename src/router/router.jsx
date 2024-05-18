@@ -1,11 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import ProtectedRoute from "../contexts/protectedRoute";
-import Home from "../pages/home/home";
+import Home from "../pages/admin/home";
 import Auth from "../pages/auth/Auth";
-import Saved from "../pages/saved/Saved";
-import Files from "../pages/files/Files";
-import SavedDetails from "../pages/savedDetails/SavedDetails";
+import Saved from "../pages/admin/saved";
+import Files from "../pages/admin/files";
+import SavedDetails from "../pages/admin/savedDetails";
+import UserHome from "../pages/user/home/UserHome";
+import SharedDetails from "../pages/user/sharedDetails";
+import SharedData from "../pages/user/sharedData";
 
 
 export const router = createBrowserRouter([
@@ -18,7 +21,7 @@ export const router = createBrowserRouter([
     ),
     children:[
       {
-        path:'/',
+        path:'/admin',
         element:<Files />
       },
       {
@@ -28,6 +31,24 @@ export const router = createBrowserRouter([
       {
         path:'/saved-details/:id',
         element:<SavedDetails />
+      }
+    ]
+  },
+  {
+    path: '/',
+    element: (
+      <ProtectedRoute>
+        <UserHome />
+      </ProtectedRoute>
+    ),
+    children:[
+      {
+        path:'/user',
+        element:<SharedData />
+      },
+      {
+        path:'/shared-details/:id',
+        element:<SharedDetails />
       }
     ]
   },
