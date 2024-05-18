@@ -6,27 +6,35 @@ import { BadgeCheck } from "lucide-react";
 import Button from "../../components/Button/Button";
 import Modal from "../../components/Modal";
 import useTokenPayload from "../../hooks/useTokenPayload";
+import toast, { Toaster } from "react-hot-toast";
 
 const Files = () => {
   const [data, setData] = React.useState([]);
+const [tableHeaders, setTableHeaders] = React.useState([]);
+
   const [errors, setErrors] = React.useState([]);
   const [isOpen, setIsOpen] = React.useState(false);
   const { userId } = useTokenPayload();
+
+  const handleSuccess = () => {
+    setData([]);
+    setErrors([]);
+    setIsOpen(false);
+  };
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     Papa.parse(file, {
       header: true,
       complete: (results) => {
-        const rowData = results.data.map((row) => ({
-          ...row,
-        }));
+        const rowData = results.data.map((row) => ({ ...row }));
         setData(rowData);
+        setTableHeaders(Object.keys(rowData[0]));
         validateFields(rowData);
       },
     });
   };
-
+  
   const validateFields = (data) => {
     const newErrors = data.map((row) => {
       let errors = {
@@ -104,7 +112,11 @@ const Files = () => {
   };
 
   const handleSaveRegister = () => {
-    setIsOpen(true);
+    if (!errors.length && data.length) {
+      setIsOpen(true);
+    }else{
+      toast.error("There cannot be unfilled fields.")
+    }
   };
 
   return (
@@ -112,7 +124,7 @@ const Files = () => {
       <div className={s.input}>
         <Input type="file" accept=".csv" onChange={handleFileUpload} />
       </div>
-      {isOpen && <Modal setIsOpen={setIsOpen} />}
+      {isOpen && <Modal setIsOpen={setIsOpen} userId={userId} savedData={data} onSuccess={handleSuccess} />}
       {data.length ? (
         <>
           <p className={s.successData}>
@@ -210,6 +222,7 @@ const Files = () => {
       ) : (
         <p className={s.successMessage}>Select a file to view the data</p>
       )}
+      <Toaster position="top-right" />
     </div>
   );
 };

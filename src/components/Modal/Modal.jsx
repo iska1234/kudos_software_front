@@ -3,13 +3,28 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import s from "./Modal.module.css";
 import { X } from "lucide-react";
+import { saveData } from "../../data/useSavedData";
+import toast, { Toaster } from "react-hot-toast";
 
-const Modal = ({ setIsOpen }) => {
+const Modal = ({ setIsOpen, userId, savedData, onSuccess }) => {
   const [description, setDescription] = React.useState("");
 
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
+
+  const handleUploadRegistry = async () => {
+    try {
+      await saveData(description, savedData, userId);
+      setIsOpen(false);
+      setDescription("");
+      onSuccess();
+      toast.success("Data registered correctly.")
+    } catch (error) {
+      console.error("Error al guardar los datos:", error);
+    }
+  };
+
   return (
     <>
       <div className={s.darkBG} onClick={() => setIsOpen(false)} />
@@ -32,10 +47,11 @@ const Modal = ({ setIsOpen }) => {
           </div>
           <div className={s.modalActions}>
             <div className={s.actionsContainer}>
-              <Button onClick={() => setIsOpen(false)}>Upload Registry</Button>
+              <Button onClick={handleUploadRegistry}>Upload Registry</Button>
             </div>
           </div>
         </div>
+        <Toaster position="top-right" />
       </div>
     </>
   );

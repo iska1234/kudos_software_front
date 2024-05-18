@@ -28,10 +28,7 @@ export function AuthProvider({ children }) {
     };
   
     try {
-      console.log("Sending login request...");
       const response = await fetch(baseUrl + "/auth/login", options);
-      console.log("Login request response:", response);
-  
       const body = await response.json();
   
       if (response.ok) {

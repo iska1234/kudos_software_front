@@ -5,6 +5,7 @@ import Home from "../pages/home/home";
 import Auth from "../pages/auth/Auth";
 import Saved from "../pages/saved/Saved";
 import Files from "../pages/files/Files";
+import SavedDetails from "../pages/savedDetails/SavedDetails";
 
 
 export const router = createBrowserRouter([
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
       {
         path:'/saved',
         element:<Saved />
+      },
+      {
+        path:'/saved-details/:id',
+        element:<SavedDetails />
       }
     ]
   },
