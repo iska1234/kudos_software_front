@@ -66,7 +66,7 @@ const SharedAdminData = () => {
                 <td>{item.shared_with_user_name}</td>
                 <td>{formatDate(item.created_at)}</td>
                 <td className={s["action-column"]}>
-                  <Link to={`/shared-details/${item.id}`}>
+                  <Link to={`/shared-detail/${item.id}`}>
                     <PencilLine color="#1d4ed8" />{" "}
                   </Link>
                   <Trash2 color="#dc2626" onClick={() => handleOpenModal(item.id)} />

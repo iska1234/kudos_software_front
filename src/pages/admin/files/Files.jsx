@@ -12,8 +12,6 @@ import useTokenPayload from "../../../hooks/useTokenPayload";
 
 const Files = () => {
   const [data, setData] = React.useState([]);
-
-
   const [errors, setErrors] = React.useState([]);
   const [isOpen, setIsOpen] = React.useState(false);
   const { userId } = useTokenPayload();

@@ -39,7 +39,7 @@ export const router = createBrowserRouter([
         element:<SharedAdminData />
       },
       {
-        path:'/shared-details/:id',
+        path:'/shared-detail/:id',
         element:<SharedAdminDetails />
       }
     ]
