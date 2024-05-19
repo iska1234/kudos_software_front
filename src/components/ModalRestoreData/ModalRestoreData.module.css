@@ -17,7 +17,7 @@
 
 .modal {
   width: 450px;
-  height: 200px;
+  height: 250px;
   background: white;
   color: white;
   z-index: 10;
@@ -53,10 +53,10 @@
 }
 
 .modalActions {
-  position: absolute;
   bottom: 2px;
   margin-bottom: 10px;
   width: 100%;
+
 }
 
 .actionsContainer {
@@ -128,30 +128,15 @@
   background: whitesmoke;
 }
 
-.select {
-  padding: 10px;
-  font-size: 14px;
-  color: #2c3e50;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 100%;
-  appearance: none;
-  background-color: #fff;
-  cursor: pointer;
-}
-
-.select:focus {
-  outline: none;
-  border-color: #2980b9;
-  box-shadow: 0 0 0 2px rgba(41, 128, 185, 0.3);
-}
-
 @media screen and (max-width: 900px) {
   .modal {
     width: 280px;
     padding: 30px;
     z-index: 20;
+  }
+  .modalContent{
+    align-items: center;
+    justify-content: center;
   }
 }
 

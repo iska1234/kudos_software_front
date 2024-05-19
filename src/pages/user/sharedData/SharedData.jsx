@@ -11,7 +11,7 @@ const SharedData = () => {
   const [savedData, setSavedData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const { userId } = useTokenPayload();
-  
+
   React.useEffect(() => {
     const fetchData = async () => {
       if (!userId) {
@@ -33,38 +33,40 @@ const SharedData = () => {
 
   return (
     <div>
-      <h1>All records</h1>
+      <h1>Shared Data</h1>
       {loading ? (
         <p>Loading...</p>
       ) : savedData.length === 0 ? (
         <h3 className={s.textCenter}>No shared records</h3>
       ) : (
-        <table className={s.table}>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Description</th>
-              <th>Shared By Admin</th>
-              <th>Created At</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {savedData.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.description}</td>
-                <td>{item.admin_name}</td>
-                <td>{formatDate(item.created_at)}</td>
-                <td className={s["action-column"]}>
-                  <Link to={`/shared-details/${item.id}`}>
-                    <PencilLine color="#1d4ed8" />{" "}
-                  </Link>
-                </td>
+        <div className={s.tableContainer}>
+          <table className={s.table}>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Shared By Admin</th>
+                <th>Created At</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {savedData.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.id}</td>
+                  <td>{item.description}</td>
+                  <td>{item.admin_name}</td>
+                  <td>{formatDate(item.created_at)}</td>
+                  <td className={s["action-column"]}>
+                    <Link to={`/shared-details/${item.id}`}>
+                      <PencilLine color="#1d4ed8" />{" "}
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

@@ -1,29 +1,28 @@
 import * as React from "react";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
-import s from "./ModalDeleteShare.module.css";
+import s from "./ModalRestoreData.module.css";
 import { X } from "lucide-react";
-
 import toast, { Toaster } from "react-hot-toast";
-import { deleteSharedDataById } from "../../data/useSharedData";
+import { restoreSharedDataById } from "../../data/useSharedData";
 
-const ModalDeleteShare = ({ setIsOpen, sharedDataId, onSuccess }) => {
+const ModalRestoreData = ({ setIsOpen, sharedDataId, onSuccess }) => {
   const [description, setDescription] = React.useState("");
   const [isDescriptionValid, setIsDescriptionValid] = React.useState(false);
   const handleDescriptionChange = (e) => {
     const newDescription = e.target.value;
     setDescription(newDescription);
 
-    setIsDescriptionValid(newDescription === "Delete Shared");
+    setIsDescriptionValid(newDescription === "Restore Shared");
   };
 
   const handleUploadRegistry = async () => {
     try {
-      await deleteSharedDataById(sharedDataId);
+      await restoreSharedDataById(sharedDataId)
       setIsOpen(false);
       setDescription("");
       onSuccess();
-      toast.success("Data deleted correctly.");
+      toast.success("Restore Data Shared Successfully.")
     } catch (error) {
       console.error("Error al guardar los datos:", error);
     }
@@ -35,18 +34,16 @@ const ModalDeleteShare = ({ setIsOpen, sharedDataId, onSuccess }) => {
       <div className={s.centered}>
         <div className={s.modal}>
           <div className={s.modalHeader}>
-            <h1 className={s.heading}>Delete Shared Data</h1>
+            <h1 className={s.heading}>Restore Data</h1>
           </div>
           <button className={s.closeBtn} onClick={() => setIsOpen(false)}>
             <X style={{ marginBottom: "-3px" }} />
           </button>
           <div className={s.modalContent}>
             <p>
-              If you want to Delete, write: &quot;<strong>Delete Shared</strong>
-              &quot;
+          If you want to Restore, write: &quot;<strong>Restore Shared</strong>&quot;
             </p>
             <Input
-              className={s.input}
               type="text"
               placeholder="Add description"
               value={description}
@@ -55,12 +52,7 @@ const ModalDeleteShare = ({ setIsOpen, sharedDataId, onSuccess }) => {
           </div>
           <div className={s.modalActions}>
             <div className={s.actionsContainer}>
-              <Button
-                onClick={handleUploadRegistry}
-                disabled={!isDescriptionValid}
-              >
-                Upload Registry
-              </Button>
+              <Button onClick={handleUploadRegistry} disabled={!isDescriptionValid}>Restore Data</Button>
             </div>
           </div>
         </div>
@@ -70,4 +62,4 @@ const ModalDeleteShare = ({ setIsOpen, sharedDataId, onSuccess }) => {
   );
 };
 
-export default ModalDeleteShare;
+export default ModalRestoreData;

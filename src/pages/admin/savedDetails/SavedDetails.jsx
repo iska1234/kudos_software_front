@@ -74,24 +74,26 @@ const SavedDetails = () => {
               <Button onClick={() => setIsOpen(true)}>Share Data</Button>
             </div>
             <h2>Data Content:</h2>
-            <table className={s.table}>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Age</th>
-                </tr>
-              </thead>
-              <tbody>
-                {parsedData.map((row, index) => (
-                  <tr key={index}>
-                    <td>{row.Name}</td>
-                    <td>{row.Email}</td>
-                    <td>{row.Age}</td>
+            <div className={s.tableContainer}>
+              <table className={s.table}>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {parsedData.map((row, index) => (
+                    <tr key={index}>
+                      <td>{row.Name}</td>
+                      <td>{row.Email}</td>
+                      <td>{row.Age}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         ) : (
           <p>No data found</p>

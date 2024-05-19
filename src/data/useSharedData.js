@@ -168,3 +168,61 @@ export async function deleteSharedDataById(sharedDataId) {
     );
   }
 }
+
+export async function restoreSharedDataById(sharedDataId) {
+  const token = localStorage.getItem(tokenKey);
+  if (!token) {
+    throw new Error("Token de acceso no encontrado");
+  }
+  const options = {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ sharedDataId }),
+  };
+  try {
+    const response = await fetch(`${baseUrl}/shareddata/restore/${sharedDataId}`, options);
+    const body = await response.json();
+
+    if (response.ok) {
+      return body.data;
+    } else {
+      throw new Error(body.message || "Error al restaurar los datos compartidos");
+    }
+  } catch (error) {
+    throw new Error(
+      error.message || "Error de red al restaurar los datos compartidos"
+    );
+  }
+}
+
+
+export async function getSharedDataDeleted() {
+  const token = localStorage.getItem(tokenKey);
+  if (!token) {
+    throw new Error("Token de acceso no encontrado");
+  }
+
+  const options = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  try {
+    const response = await fetch(`${baseUrl}/shareddata/shared/deleted`, options);
+    const data = await response.json();
+
+    if (response.ok) {
+      return data;
+    } else {
+      throw new Error(data.message || "Error al obtener los datos compartidos con deleted en true");
+    }
+  } catch (error) {
+    throw new Error(error.message || "Error de red al obtener los datos compartidos con deleted en true");
+  }
+}
+

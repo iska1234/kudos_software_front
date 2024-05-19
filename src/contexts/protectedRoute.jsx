@@ -13,12 +13,12 @@ export default function ProtectedRoute({ children }) {
             if (isAuthenticated) {
                 const encryptedUserRole = localStorage.getItem("userRole");
                 const userRole = decryptData(encryptedUserRole);
-                const lastVisitedRoute = localStorage.getItem("lastVisitedRoute");
 
+                const lastVisitedRoute = localStorage.getItem("lastVisitedRoute");
                 localStorage.setItem("lastVisitedRoute", location.pathname);
 
                 if (location.pathname === "/login") {
-                    navigate(lastVisitedRoute || "/", { replace: true });
+                    navigate(lastVisitedRoute || (userRole === "admin" ? "/admin" : "/user"), { replace: true });
                 } else if (userRole === "admin" && location.pathname.startsWith("/user")) {
                     navigate("/admin", { replace: true });
                 } else if (userRole === "user" && location.pathname.startsWith("/admin")) {

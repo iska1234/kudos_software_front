@@ -139,6 +139,8 @@ const Files = () => {
             <Button onClick={handleSaveRegister}>Save data</Button>
           </div>
           {errors.length ? (
+            <div className={s.tableContainer}>
+
             <table className={s.table}>
               <thead>
                 <tr>
@@ -212,6 +214,7 @@ const Files = () => {
                 })}
               </tbody>
             </table>
+            </div>
           ) : (
             <p className={s.successMessage}>
               There are no errors. All data is valid.

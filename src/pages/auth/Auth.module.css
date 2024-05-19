@@ -70,3 +70,17 @@ button.active {
   color: red;
   text-align: center;
 }
+
+
+@media screen and (max-width: 900px) {
+  .wrapper {
+    max-width: 85%;
+    padding: 30px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .wrapper {
+    padding: 10px;
+  }
+}

@@ -1,0 +1,30 @@
+.drawer {
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.drawerContent {
+    background: linear-gradient(135deg, #2c8ab0 0%, #5bc2d4 50%, #8ab8d4 100%);
+    padding: 20px;
+    color: white;
+    height: 100%;
+}
+
+.links {
+    color: white;
+    text-decoration: none;
+    margin: 10px 0;
+    font-size: 18px;
+}
+.linkContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    
+  }
+
+
+.links:hover {
+    text-decoration: underline;
+}

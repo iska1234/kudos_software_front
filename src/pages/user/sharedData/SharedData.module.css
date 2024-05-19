@@ -27,4 +27,6 @@
   .table .action-column {
     text-align: center;
   }
-  
+  .tableContainer {
+    overflow-x: auto;
+  }

@@ -1,39 +1,34 @@
 import * as React from "react";
-import s from "./SharedData.module.css";
-import { PencilLine, Trash2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import s from "./DeletedData.module.css";
+import { ArchiveRestore } from "lucide-react";
 import { formatDate } from "../../../utils/formatDate";
-import useTokenPayload from "../../../hooks/useTokenPayload";
-import { getAllAdminSharedData } from "../../../data/useSharedData";
-import ModalDeleteShare from "../../../components/ModalDeleteData/ModalDeleteShare";
 import { Toaster } from "react-hot-toast";
+import { getSharedDataDeleted } from "../../../data/useSharedData";
+import ModalRestoreData from "../../../components/ModalRestoreData/ModalRestoreData";
 
-const SharedAdminData = () => {
+const DeletedData = () => {
   const [savedData, setSavedData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [isOpen, setIsOpen] = React.useState(false);
-  const { userId } = useTokenPayload();
   const [sharedDataIdToDelete, setSharedDataIdToDelete] = React.useState(null);
 
   React.useEffect(() => {
     const fetchData = async () => {
-      if (!userId) {
-        setLoading(false);
-        return;
-      }
       try {
-        const data = await getAllAdminSharedData(userId);
-        const filteredData = data.filter((item) => !item.deleted);
-        setSavedData(filteredData);
+        const data = await getSharedDataDeleted();
+        setSavedData(data.data);
         setLoading(false);
       } catch (error) {
-        console.error("Error al obtener los datos guardados:", error);
+        console.error(
+          "Error al obtener los datos compartidos con deleted en true:",
+          error
+        );
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [userId]);
+  }, []);
 
   const handleOpenModal = (sharedDataId) => {
     setIsOpen(true);
@@ -67,12 +62,9 @@ const SharedAdminData = () => {
                   <td>{item.shared_with_user_name}</td>
                   <td>{formatDate(item.created_at)}</td>
                   <td className={s["action-column"]}>
-                    <Link to={`/shared-detail/${item.id}`}>
-                      <PencilLine color="#1d4ed8" />{" "}
-                    </Link>
-                    <Trash2
-                    className={s.links}
-                      color="#dc2626"
+                    <ArchiveRestore
+                      className={s.link}
+                      color="#16a34a"
                       onClick={() => handleOpenModal(item.id)}
                     />
                   </td>
@@ -83,7 +75,7 @@ const SharedAdminData = () => {
         </div>
       )}
       {isOpen && (
-        <ModalDeleteShare
+        <ModalRestoreData
           setIsOpen={setIsOpen}
           sharedDataId={sharedDataIdToDelete}
           onSuccess={() => {
@@ -99,4 +91,4 @@ const SharedAdminData = () => {
   );
 };
 
-export default SharedAdminData;
+export default DeletedData;

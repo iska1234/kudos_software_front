@@ -52,6 +52,7 @@ const SharedDetails = () => {
             <p>Shared By Admin: {savedData.admin_name}</p>
             <p>Shared At: {formatDate(savedData.updated_at)}</p>
             <h2>Data Content:</h2>
+            <div className={s.tableContainer}>
             <table className={s.table}>
               <thead>
                 <tr>
@@ -71,6 +72,7 @@ const SharedDetails = () => {
               </tbody>
             </table>
           </div>
+        </div>
         ) : (
           <p>No data found</p>
         )}

@@ -11,6 +11,7 @@ import SharedDetails from "../pages/user/sharedDetails";
 import SharedData from "../pages/user/sharedData";
 import SharedAdminData from "../pages/admin/sharedData/SharedData";
 import SharedAdminDetails from "../pages/admin/sharedDetails/SharedDetails";
+import DeletedData from "../pages/admin/deletedData/DeletedData";
 
 export const router = createBrowserRouter([
   {
@@ -40,7 +41,11 @@ export const router = createBrowserRouter([
       {
         path:'/shared-detail/:id',
         element:<SharedAdminDetails />
-      }
+      },
+      {
+        path:'/deleted-data',
+        element:<DeletedData />
+      },
     ]
   },
   {

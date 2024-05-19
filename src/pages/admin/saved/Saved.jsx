@@ -39,6 +39,8 @@ const Saved = () => {
       ) : savedData.length === 0 ? (
         <h3 className={s.textCenter}>No hay registros guardados</h3>
       ) : (
+        <div className={s.tableContainer}>
+
         <table className={s.table}>
           <thead>
             <tr>
@@ -65,6 +67,7 @@ const Saved = () => {
             ))}
           </tbody>
         </table>
+      </div>
       )}
     </div>
   );

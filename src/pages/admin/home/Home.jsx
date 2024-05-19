@@ -1,17 +1,27 @@
-import { Link, Outlet } from "react-router-dom";
+import * as React from "react";
+import { Outlet } from "react-router-dom";
 import Button from "../../../components/Button/Button";
 import { useAuth } from "../../../contexts/authContext";
 import s from "./Home.module.css";
+import DrawerMenu from "../../../components/DrawerMenu";
+import { Menu } from "lucide-react";
+import { adminLinks } from "../../../utils/adminLinks";
+
 
 const Home = () => {
   const { logout } = useAuth();
+  const [isOpen, setIsOpen] = React.useState(false);
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
   return (
     <div>
+   <DrawerMenu isOpen={isOpen} toggleDrawer={toggleDrawer} links={adminLinks} />
       <nav className={s.navbar}>
         <div className={s.linkContainer}>
-          <Link className={s.links} to={"/admin"}>Kubos Software</Link>
-          <Link className={s.links} to={"/saved"}>Saved Data</Link>
-          <Link className={s.links} to={"/shared-data"}>Shared Data</Link>
+          <Menu className={s.links} color="white" onClick={toggleDrawer} />
+          <h2 className={s.title}>Kubos Software</h2>
         </div>
         <Button
           variant="secondary"

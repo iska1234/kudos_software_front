@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
 import s from "./SharedDetails.module.css";
-import { Link, useParams } from 'react-router-dom';
-import { getSharedDataById } from '../../../data/useSharedData';
-import Button from '../../../components/Button/Button';
-import { parseDataContent } from '../../../utils/parseDataContent';
-import { formatDate } from '../../../utils/formatDate';
+import { Link, useParams } from "react-router-dom";
+import { getSharedDataById } from "../../../data/useSharedData";
+import Button from "../../../components/Button/Button";
+import { parseDataContent } from "../../../utils/parseDataContent";
+import { formatDate } from "../../../utils/formatDate";
 
 const SharedAdminDetails = () => {
   const { id } = useParams();
@@ -52,24 +52,26 @@ const SharedAdminDetails = () => {
             <p>Shared to User: {savedData.shared_with_user_name}</p>
             <p>Shared At: {formatDate(savedData.updated_at)}</p>
             <h2>Data Content:</h2>
-            <table className={s.table}>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Age</th>
-                </tr>
-              </thead>
-              <tbody>
-                {parsedData.map((row, index) => (
-                  <tr key={index}>
-                    <td>{row.Name}</td>
-                    <td>{row.Email}</td>
-                    <td>{row.Age}</td>
+            <div className={s.tableContainer}>
+              <table className={s.table}>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {parsedData.map((row, index) => (
+                    <tr key={index}>
+                      <td>{row.Name}</td>
+                      <td>{row.Email}</td>
+                      <td>{row.Age}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         ) : (
           <p>No data found</p>
