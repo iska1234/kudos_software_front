@@ -9,6 +9,8 @@ import SavedDetails from "../pages/admin/savedDetails";
 import UserHome from "../pages/user/home/UserHome";
 import SharedDetails from "../pages/user/sharedDetails";
 import SharedData from "../pages/user/sharedData";
+import SharedAdminData from "../pages/admin/sharedData/SharedData";
+import SharedAdminDetails from "../pages/admin/sharedDetails/SharedDetails";
 
 
 export const router = createBrowserRouter([
@@ -31,6 +33,14 @@ export const router = createBrowserRouter([
       {
         path:'/saved-details/:id',
         element:<SavedDetails />
+      },
+      {
+        path:'/shared-data',
+        element:<SharedAdminData />
+      },
+      {
+        path:'/shared-details/:id',
+        element:<SharedAdminDetails />
       }
     ]
   },

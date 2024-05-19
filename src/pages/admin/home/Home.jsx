@@ -11,6 +11,7 @@ const Home = () => {
         <div className={s.linkContainer}>
           <Link className={s.links} to={"/admin"}>Kubos Software</Link>
           <Link className={s.links} to={"/saved"}>Saved Data</Link>
+          <Link className={s.links} to={"/shared-data"}>Shared Data</Link>
         </div>
         <Button
           variant="secondary"

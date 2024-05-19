@@ -28,12 +28,18 @@
   text-align: center;
 }
 
-.headers{
+.headers {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.btnLink{
+.btnLink {
   text-decoration: none;
   color: inherit;
+}
+
+.shareData{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

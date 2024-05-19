@@ -25,6 +25,10 @@
   }
   
   .table .action-column {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
     text-align: center;
   }
   
