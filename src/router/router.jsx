@@ -12,7 +12,6 @@ import SharedData from "../pages/user/sharedData";
 import SharedAdminData from "../pages/admin/sharedData/SharedData";
 import SharedAdminDetails from "../pages/admin/sharedDetails/SharedDetails";
 
-
 export const router = createBrowserRouter([
   {
     path: '/',

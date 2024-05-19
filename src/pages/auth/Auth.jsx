@@ -3,6 +3,7 @@ import s from "./Auth.module.css";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import { useAuth } from "../../contexts/authContext";
+import toast, { Toaster } from "react-hot-toast";
 
 
 function Auth() {
@@ -45,10 +46,10 @@ function Auth() {
     setStatus("loading");
   
     signup(email, password, name, Number(age))
+    toast.success("Register Successfully.")
       .then(() => setStatus("success"))
       .catch((error) => {
         setStatus("error");
-  
         if (
           error.message === "El usuario no existe" ||
           error.message === "Contraseña incorrecta"
@@ -172,6 +173,7 @@ function Auth() {
         )}
         {hasError && <p className={s.errorMessage}>{signUpErrors}</p>}
       </div>
+      <Toaster position="top-right" />
     </div>
   );
 }
