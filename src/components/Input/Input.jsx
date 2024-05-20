@@ -16,6 +16,7 @@ const Input = ({
       id={id}
       type={type}
       value={value}
+      data-testid="test-input"
       {...delegated}
     />
   );

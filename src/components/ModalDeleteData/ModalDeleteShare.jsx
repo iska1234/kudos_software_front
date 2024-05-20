@@ -59,7 +59,7 @@ const ModalDeleteShare = ({ setIsOpen, sharedDataId, onSuccess }) => {
                 onClick={handleUploadRegistry}
                 disabled={!isDescriptionValid}
               >
-                Upload Registry
+                Delete Share
               </Button>
             </div>
           </div>

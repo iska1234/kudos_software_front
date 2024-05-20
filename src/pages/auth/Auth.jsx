@@ -37,17 +37,25 @@ function Auth() {
 
   function handleSignupSubmit(event) {
     event.preventDefault();
-  
+    
     const email = event.target.email.value;
     const password = event.target.password.value;
     const name = event.target.name.value;
     const age = event.target.age.value;
-  
+    
     setStatus("loading");
-  
+    
     signup(email, password, name, Number(age))
-    toast.success("Register Successfully.")
-      .then(() => setStatus("success"))
+      .then(() => {
+        toast.success("Register Successfully.");
+        setStatus("success");
+  
+        // Limpiar los campos después del registro exitoso
+        event.target.email.value = "";
+        event.target.password.value = "";
+        event.target.name.value = "";
+        event.target.age.value = "";
+      })
       .catch((error) => {
         setStatus("error");
         if (
@@ -60,13 +68,13 @@ function Auth() {
             error.message || "Error desconocido al registrar usuario"
           );
         }
-  
+    
         setTimeout(() => {
           setSignUpErrors(null);
         }, 2000);
       });
   }
-  
+
 
   function handleTabChange(tab) {
     setActiveTab(tab);
